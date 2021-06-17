@@ -1,0 +1,22 @@
+.element {
+    animation: roll 3s infinite;
+  }
+  
+@keyframes roll {
+0% {
+    transform:  scale(1,1);
+}
+100% {
+    transform: scale(4,4);
+}
+}
+.context{
+display: flex;
+justify-content: center;
+padding: 25%;
+}
+.text {
+position: absolute;
+animation: tran 10s infinite;
+top:90%;
+}

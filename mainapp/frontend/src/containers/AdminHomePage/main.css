@@ -1,0 +1,21 @@
+
+@media (prefers-reduced-motion: no-preference) {
+.App-logo {
+    animation: spin infinite 1s linear ;
+}
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+
+.row-full{
+    width: 100vw;
+    position: relative;
+    padding-left: 28px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
