@@ -7,7 +7,7 @@ from datetime import datetime
 from config.mqtt import connect_mqtt
 from pymodbus.client.sync import ModbusSerialClient
 client = ModbusSerialClient(
-    method="rtu", port="COM5", stopbits=1, bytesize=8, parity='N', baudrate=9600)
+    method="rtu", port="COM4", stopbits=1, bytesize=8, parity='N', baudrate=9600)
 client.connect()
 
 

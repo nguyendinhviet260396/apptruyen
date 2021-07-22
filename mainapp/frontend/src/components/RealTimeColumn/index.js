@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 class RealTimeColumn extends Component {
 
     render() {
-        const {data} = this.props;
+        const {data,unit} = this.props;
         const series = [{
-              name: 'Năng lượng',
+              name: '',
               data:data,
             }];
         const options =  {
@@ -43,7 +43,7 @@ class RealTimeColumn extends Component {
                 },
                 labels: {
                   formatter: function (y) {
-                    return y.toFixed(3) + "kWh";
+                    return y.toFixed(3) + unit;
                   }
                 }
               },

@@ -44,7 +44,6 @@ class SDM220Model(db.Model):
         params = (self.device_id, self.frequency, self.powerfactor, self.voltage,
                   self.current, self.power, self.enegry, self.timestamp)
         return run(query, params)
-        
 
     def delete(self):
         query = """
@@ -91,6 +90,7 @@ class SDM220Model(db.Model):
             df['timestamp'] = df['timestamp'].astype(str)
             df_new = pd.concat([df_new, df])
         return df_new
+
     @staticmethod
     def getenegrylasthours(from_date, to_date, value):
         df_new = pd.DataFrame([])
@@ -210,6 +210,45 @@ class SDM220Model(db.Model):
             df = df.iloc[[1]]
             df_new = pd.concat([df_new, df])
             df_new = df_new[['timestamp', 'enegry']]
+        return df_new
+
+    @staticmethod
+    def getanalytics(from_date, to_date, _type):
+        df_new = pd.DataFrame([])
+        query = """
+            SELECT %s,timestamp
+            FROM sdm220table
+            WHERE timestamp BETWEEN '%s' AND '%s'
+            """ % (_type, from_date, to_date)
+        df = pd.read_sql(query, con=connection)
+
+        if len(df) > 0:
+            df = df.groupby(pd.Grouper(key='timestamp',
+                            freq='15min')).first().reset_index()
+            if _type == "enegry":
+                df['enegry'] = df.enegry - df.enegry.shift()
+            df = df.fillna(0)
+            df['timestamp'] = df['timestamp'].astype(str)
+            df_new = pd.concat([df_new, df])
+        return df_new
+
+    @staticmethod
+    def history(from_date, to_date):
+        df_new = pd.DataFrame([])
+        query = """
+            SELECT *
+            FROM sdm220table
+            WHERE timestamp BETWEEN '%s' AND '%s'
+            """ % (from_date, to_date)
+        df = pd.read_sql(query, con=connection)
+        if len(df) > 0:
+            df = df.groupby(pd.Grouper(key='timestamp',
+                            freq='15min')).first().reset_index()
+            df = df.fillna(0)
+            df['timestamp'] = df['timestamp'].astype(str)
+
+
+            df_new = pd.concat([df_new, df])
         return df_new
 
     def __repr(self):

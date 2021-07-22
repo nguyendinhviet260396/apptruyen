@@ -10,8 +10,8 @@ import DetailHouse from './../containers/DeviceDashboards/DetailHouse';
 import DetailSolar1 from './../containers/DeviceDashboards/DetailSolar1';
 import DetailSolar2 from './../containers/DeviceDashboards/DetailSolar2';
 import NotPound from './../components/NotPound';
-import AlarmPage from './../containers/AlarmPage/index';
-export const API_ENDPOINT = 'http://127.0.0.1:3636';
+import HistoryPage from './../containers/HistoryPage';
+export const API_ENDPOINT = '';
 
 export const STATUS_CODE = {
   SUCCESS: 200,
@@ -30,10 +30,10 @@ export const ADMIN_ROUTES = [
     component: AdminHomePage,
   },
   {
-    path: '/alarm',
-    name: 'Alarm',
+    path: '/history',
+    name: 'History',
     exact: false,
-    component: AlarmPage,
+    component: HistoryPage,
   },
   {
     path: '/config',

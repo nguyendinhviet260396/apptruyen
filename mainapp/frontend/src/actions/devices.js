@@ -347,3 +347,26 @@ export const refeshMainCalculatorEnegryFailed = error => ({
     error,
   },
 });
+
+
+// Action request history
+export const refeshHistory = (params = {}) => ({
+  type: deviceTypes.REFESH_HISTORY,
+  payload: {
+    params,
+  },
+});
+
+export const refeshHistorySuccess = data => ({
+  type: deviceTypes.REFESH_HISTORY_SUCCESS,
+  payload: {
+    data,
+  },
+});
+
+export const refeshHistoryFailed = error => ({
+  type: deviceTypes.REFESH_HISTORY_FAILED,
+  payload: {
+    error,
+  },
+});

@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b13836ea.chunk.css",
+    "main.js": "/static/js/main.06fb7794.chunk.js",
+    "main.js.map": "/static/js/main.06fb7794.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.169e11ec.js",
+    "runtime-main.js.map": "/static/js/runtime-main.169e11ec.js.map",
+    "static/css/2.9d86ff85.chunk.css": "/static/css/2.9d86ff85.chunk.css",
+    "static/js/2.8b99c108.chunk.js": "/static/js/2.8b99c108.chunk.js",
+    "static/js/2.8b99c108.chunk.js.map": "/static/js/2.8b99c108.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.a0862facd13e41e1c5f5483fa33814f1.js": "/precache-manifest.a0862facd13e41e1c5f5483fa33814f1.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.9d86ff85.chunk.css.map": "/static/css/2.9d86ff85.chunk.css.map",
+    "static/css/main.b13836ea.chunk.css.map": "/static/css/main.b13836ea.chunk.css.map",
+    "static/js/2.8b99c108.chunk.js.LICENSE.txt": "/static/js/2.8b99c108.chunk.js.LICENSE.txt",
+    "static/media/ems_logo.png": "/static/media/ems_logo.f0bf5b7e.png",
+    "static/media/enegry.jpg": "/static/media/enegry.6b59b4f4.jpg",
+    "static/media/hoca.jpg": "/static/media/hoca.709f9d5a.jpg",
+    "static/media/home.jpg": "/static/media/home.2faf8266.jpg",
+    "static/media/loading1.gif": "/static/media/loading1.75e4ad33.gif",
+    "static/media/santhuong.jpg": "/static/media/santhuong.ac52d55a.jpg",
+    "static/media/solar2.jpg": "/static/media/solar2.f383ed6d.jpg",
+    "static/media/solar3.jpg": "/static/media/solar3.1d0534de.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.169e11ec.js",
+    "static/css/2.9d86ff85.chunk.css",
+    "static/js/2.8b99c108.chunk.js",
+    "static/css/main.b13836ea.chunk.css",
+    "static/js/main.06fb7794.chunk.js"
+  ]
+}

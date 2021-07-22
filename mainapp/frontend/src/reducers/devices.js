@@ -17,6 +17,7 @@ const initialState = {
   listMainEnegryMonthly: [],
   listCalculatorEnegry: [],
   listMainCalculatorEnegry: [],
+  listHistory: [],
 };
 const deviceReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -301,6 +302,23 @@ const deviceReducer = (state = initialState, action) => {
       };
     }
     case types.REFESH_MAIN_CALCULATOR_ENEGRY_FAILED: {
+      return {
+        ...state,
+      };
+    }
+    case types.REFESH_HISTORY: {
+      return {
+        ...state,
+      };
+    }
+    case types.REFESH_HISTORY_SUCCESS: {
+      const { data } = action.payload;
+      return {
+        ...state,
+        listHistory: data,
+      };
+    }
+    case types.REFESH_HISTORY_FAILED: {
       return {
         ...state,
       };

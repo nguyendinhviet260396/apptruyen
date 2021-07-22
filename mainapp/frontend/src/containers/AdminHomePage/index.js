@@ -649,7 +649,7 @@ class AdminHomePage extends Component {
                 Biểu đồ phụ tải
               </div>
               <AreaChart
-                data={listMainEnegry.length !== 0 ? listMainEnegry[0] : []}
+                data={listMainEnegry.length !== 0 ? listMainEnegry[0] : [] } unit={"kW"}
               />
             </Grid>
           </Grid>
@@ -667,7 +667,7 @@ class AdminHomePage extends Component {
                 Biểu đồ năng lượng tiêu thụ
               </div>
               <RealTimeColumn
-                data={listMainEnegry.length !== 0 ? listMainEnegry[1] : []}
+                data={listMainEnegry.length !== 0 ? listMainEnegry[1] : [] } unit ={'kWh'}
               />
             </Grid>
           </Grid>

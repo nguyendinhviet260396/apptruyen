@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import ReactApexChart from "react-apexcharts";
 class AreaChart extends Component {
     render() {
-      const {data} = this.props;
+      const {data,unit} = this.props;
       const target = 25;
         const series = [{
-            name:'power',
+            name:'',
             data: data
 
            }]
@@ -96,7 +96,7 @@ class AreaChart extends Component {
               },
               labels: {
                 formatter: function (y) {
-                  return y.toFixed(3) + "kW";
+                  return y.toFixed(3) + unit;
                 }
               },
               min: 0,

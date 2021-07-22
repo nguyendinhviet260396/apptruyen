@@ -156,6 +156,41 @@ def caculatorenegry():
     return custom_response(data, 200)
 
 
+@sdm220_api.route('/analytics', methods=['GET'])
+def getanalytics():
+    _type = request.args.get('type')
+    from_date = request.args.get('fromdate')+" " + \
+        request.args.get('fromtime')+":00"
+    to_date = request.args.get('todate')+" "+request.args.get('totime')+":00"
+    df = SDM220Model.getanalytics(from_date, to_date, _type)
+    df = df.to_dict(orient='records')
+    df_new = []
+    if len(df):
+        for i in df:
+            if _type == "enegry":
+                df_new.append(
+                    [datetime.strptime(i['timestamp'], "%Y-%m-%d  %H:%M:%S"), i['enegry']])
+            elif _type == "power":
+                df_new.append(
+                    [datetime.strptime(i['timestamp'], "%Y-%m-%d  %H:%M:%S"), i['power']])
+            elif _type == "current":
+                df_new.append(
+                    [datetime.strptime(i['timestamp'], "%Y-%m-%d  %H:%M:%S"), i['current']])
+    return custom_response(df_new, 200)
+
+
+@sdm220_api.route('/history', methods=['GET'])
+def history():
+    # from_date = request.args.get('fromdate')+" " + \
+    #     request.args.get('fromtime')+":00"
+    # to_date = request.args.get('todate')+" "+request.args.get('totime')+":00"
+    from_date, to_date = gettoday()
+    df = SDM220Model.history(from_date, to_date)
+    df = df.to_dict(orient='records')
+    df =list(reversed(df))
+    return custom_response(df, 200)
+
+
 def custom_response(res, status_code):
     """
     Custom Response Function

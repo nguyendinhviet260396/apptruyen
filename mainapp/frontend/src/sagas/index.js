@@ -107,6 +107,8 @@ import {
   refeshCalculatorEnegryFailed,
   refeshMainCalculatorEnegrySuccess,
   refeshMainCalculatorEnegryFailed,
+  refeshHistorySuccess,
+  refeshHistoryFailed,
 } from '../actions/devices';
 /**
  * B1: dispatch action fetchTask
@@ -347,7 +349,7 @@ function* deleteUserlogSaga({ payload }) {
 function* analyticsSaga({ payload }) {
   const { params } = payload;
   yield put(showLoading());
-  const resp = yield call(getListAnalytics, 'api/v1/main/analytics', params);
+  const resp = yield call(getListAnalytics, 'api/v1/sdm220/analytics', params);
   const { status, data } = resp;
   if (status === STATUS_CODE.SUCCESS && data.lenght !== 0) {
     yield put(fetchListAnalyticsSuccess(data));
@@ -459,7 +461,7 @@ function* refeshPowerSolar02Area({ payload }) {
 // refesh data main last
 function* refeshMainLastSaga({ payload }) {
   const { params } = payload;
-  const resp = yield call(getListData, 'api/v1/sdm220/getlast', { params});
+  const resp = yield call(getListData, 'api/v1/sdm220/getlast', { params });
   const { status, data } = resp;
   if (status === STATUS_CODE.SUCCESS && data.lenght !== 0) {
     yield put(refeshMainLastSuccess(data));
@@ -470,7 +472,7 @@ function* refeshMainLastSaga({ payload }) {
 // refesh data main min
 function* refeshMainEnegrySaga({ payload }) {
   const { params } = payload;
-  const resp = yield call(getListData, 'api/v1/sdm220/getlast5min', { params});
+  const resp = yield call(getListData, 'api/v1/sdm220/getlast5min', { params });
   const { status, data } = resp;
   if (status === STATUS_CODE.SUCCESS && data.lenght !== 0) {
     yield put(refeshMainEnegrySuccess(data));
@@ -547,6 +549,20 @@ function* refeshmainenegrycalculator({ payload }) {
     yield put(refeshMainCalculatorEnegryFailed(data));
   }
 }
+
+// refesh history
+function* refeshHistorySaga({ payload }) {
+  const { params } = payload;
+  const resp = yield call(getListData, 'api/v1/sdm220/history', {
+    params,
+  });
+  const { status, data } = resp;
+  if (status === STATUS_CODE.SUCCESS && data.lenght !== 0) {
+    yield put(refeshHistorySuccess(data));
+  } else {
+    yield put(refeshHistoryFailed(data));
+  }
+}
 function* rootSaga() {
   yield fork(watchFetchListAlarmAction);
   yield fork(watchFetchListUserLogAction);
@@ -565,21 +581,49 @@ function* rootSaga() {
   yield takeLatest(analyticsTypes.ANALYTICS, analyticsSaga);
   yield takeLatest(deviceTypes.REFESH_MAIN_LAST, refeshMainLastSaga);
   yield takeLatest(deviceTypes.REFESH_MAIN_ENEGRY, refeshMainEnegrySaga);
-  yield takeLatest(deviceTypes.REFESH_MAIN_ENEGRY_DAYLY,refeshMainEnegryDaylySaga);
-  yield takeLatest(deviceTypes.REFESH_MAIN_ENEGRY_HOURLY,refeshMainEnegryHourlySaga);
-  yield takeLatest(deviceTypes.REFESH_MAIN_ENEGRY_WEEKLY,refeshMainEnegryWeeklySaga);
-  yield takeLatest(deviceTypes.REFESH_MAIN_ENEGRY_MONTHLY,refeshMainEnegryMonthlySaga);
+  yield takeLatest(
+    deviceTypes.REFESH_MAIN_ENEGRY_DAYLY,
+    refeshMainEnegryDaylySaga,
+  );
+  yield takeLatest(
+    deviceTypes.REFESH_MAIN_ENEGRY_HOURLY,
+    refeshMainEnegryHourlySaga,
+  );
+  yield takeLatest(
+    deviceTypes.REFESH_MAIN_ENEGRY_WEEKLY,
+    refeshMainEnegryWeeklySaga,
+  );
+  yield takeLatest(
+    deviceTypes.REFESH_MAIN_ENEGRY_MONTHLY,
+    refeshMainEnegryMonthlySaga,
+  );
   yield takeLatest(deviceTypes.REFESH_HOUSE_AREA, refeshHouseArea);
   yield takeLatest(deviceTypes.REFESH_POWER_HOUSE_AREA, refeshPowerHouseArea);
   yield takeLatest(deviceTypes.REFESH_FISH_LAKE_AREA, refeshfishLakeArea);
-  yield takeLatest(deviceTypes.REFESH_POWER_FISH_LAKE_AREA,refeshPowerfishLakeArea);
+  yield takeLatest(
+    deviceTypes.REFESH_POWER_FISH_LAKE_AREA,
+    refeshPowerfishLakeArea,
+  );
   yield takeLatest(deviceTypes.REFESH_SOLAR01_AREA, refeshSolar01Area);
-  yield takeLatest(deviceTypes.REFESH_POWER_SOLAR01_AREA,refeshPowerSolar01Area);
+  yield takeLatest(
+    deviceTypes.REFESH_POWER_SOLAR01_AREA,
+    refeshPowerSolar01Area,
+  );
   yield takeLatest(deviceTypes.REFESH_SOLAR02_AREA, refeshSolar02Area);
-  yield takeLatest(deviceTypes.REFESH_POWER_SOLAR02_AREA,refeshPowerSolar02Area);
+  yield takeLatest(
+    deviceTypes.REFESH_POWER_SOLAR02_AREA,
+    refeshPowerSolar02Area,
+  );
   yield takeLatest(weatherTypes.REFESH_WEATHER, refeshWeatherSaga);
-  yield takeLatest(deviceTypes.REFESH_CALCULATOR_ENEGRY,refeshenegrycalculator);
-  yield takeLatest(deviceTypes.REFESH_MAIN_CALCULATOR_ENEGRY,refeshmainenegrycalculator);
+  yield takeLatest(
+    deviceTypes.REFESH_CALCULATOR_ENEGRY,
+    refeshenegrycalculator,
+  );
+  yield takeLatest(
+    deviceTypes.REFESH_MAIN_CALCULATOR_ENEGRY,
+    refeshmainenegrycalculator,
+  );
+  yield takeLatest(deviceTypes.REFESH_HISTORY, refeshHistorySaga);
 }
 
 export default rootSaga;
